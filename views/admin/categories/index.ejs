@@ -1,0 +1,47 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+
+<div class="container">
+    <h2 style="margin: 1rem 0;">Categories</h2>
+    <a style="margin-bottom: 1rem;" class="btn btn-success" href="/admin/categories/new">New category</a>
+    <table class="table table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% categories.forEach(category => { %>
+            <tr>
+                <th style="font-weight: 400;"><%= category.id %></th>
+                <th style="font-weight: 400;"><%= category.title %></th>
+                <th style="font-weight: 400;"><%= category.slug %></th>
+                <th style="font-weight: 400;">
+                    <a class="btn btn-sm btn-warning" href="/admin/categories/edit/<%= category.id %>">Edit</a>
+                    <form method="post" style="display: inline;" action="/categories/delete" onsubmit="confirmDelete(event, this)">
+                        <input type="hidden" name="id" value="<%= category.id %>">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </th>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../../partials/footer.ejs') %>
+
+<script>
+    function confirmDelete(event, form){
+        event.preventDefault();
+        var decision = confirm('Are you sure about that?');
+        if(decision) {
+            form.submit();
+        } else {
+            console.log('Action canceled!');
+        }
+    }
+</script>

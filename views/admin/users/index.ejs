@@ -1,0 +1,27 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+
+<div class="container">
+    <h2 style="margin: 1rem 0;">Users</h2>
+    <a style="margin-bottom: 1rem;" class="btn btn-success" href="/admin/users/new">New user</a>
+    <table class="table table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Login</th>
+                <th>Password hash</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+            <tr>
+                <th style="font-weight: 400;"><%= user.id %></th>
+                <th style="font-weight: 400;"><%= user.login%></th>
+                <th style="font-weight: 400;"><%= user.password %></th>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../../partials/footer.ejs') %>
